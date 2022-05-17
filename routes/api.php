@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DailyListController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +26,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Public routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-//Route::get('/tasks', [TaskController::class, 'index']);
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+//Route::get('/users/filtering', [UserController::class, 'indexFiltering'])->name('users.indexFiltering');
+Route::get('/userFilterLists', [UserController::class, 'getUsersWithLists'])->name('users.getUsersWithLists');
+Route::post('/listCreate', [DailyListController::class, 'store'])->name('dailyLists.store');
+Route::put('/listUpdate/{id}', [DailyListController::class, 'update'])->name('dailyLists.update');
+Route::delete('/listDelete/{id}', [DailyListController::class, 'destroy'])->name('dailyLists.destroy');
 //Route::get('/tasks/{id}', [TaskController::class, 'show']);
 
 //Protected routes
