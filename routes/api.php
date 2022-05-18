@@ -21,19 +21,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-//Route::resource('tasks', TaskController::class);
 
 //Public routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-//Route::get('/users/filtering', [UserController::class, 'indexFiltering'])->name('users.indexFiltering');
-Route::get('/userFilterLists', [UserController::class, 'getUsersWithLists'])->name('users.getUsersWithLists');
+Route::get('/users', [DailyListController::class, 'usersFilterLists'])->name('dailyLists.usersFilterLists');
 Route::post('/listCreate', [DailyListController::class, 'store'])->name('dailyLists.store');
 Route::put('/listUpdate/{id}', [DailyListController::class, 'update'])->name('dailyLists.update');
 Route::delete('/listDelete/{id}', [DailyListController::class, 'destroy'])->name('dailyLists.destroy');
-//Route::get('/tasks/{id}', [TaskController::class, 'show']);
 
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {

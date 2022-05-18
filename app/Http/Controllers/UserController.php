@@ -13,28 +13,27 @@ class UserController extends Controller
         return new UserCollection(User::all());
     }
 
-    public function getUsersWithLists()
-    {
-
-//        $Products = Users::with('groups')->get();
-//        return $Products ;
-        return User::find(73)->dailyLists()->sortBy('title', 'asc')->get();
-
-    }
-
-//    public function indexFiltering(Request $request)
+//    public function usersFilterLists(Request $request)
 //    {
-//        $filter = $request->query('filter');
+//        $userQuery = User::with('dailyLists');
 //
-//        if (!empty($filter)) {
-//            $products = User::sortable()
-//                ->where('users.name', 'like', '%'.$filter.'%')
-//                ->paginate(5);
-//        } else {
-//            $products = User::sortable()
-//                ->paginate(5);
+//        if($request->title){
+//            $userQuery->with('dailyLists', function($query) use ($request){
+//                $query->where('title', 'LIKE', '%' . $request->title . '%');
+//            });
 //        }
 //
-//        return $products;
+//        if($request->date){
+//            $userQuery->with('dailyLists', function($query) use ($request){
+//                    $query->where('date', $request->date);
+//            });
+//        }
+//
+//        $users = User::with('dailyLists')->paginate($request->get('per_page', 10));
+//        return response()->json([
+//            'message' => 'Blog successfully fetched',
+//            'data' =>$users
+//        ]);
+//
 //    }
 }
