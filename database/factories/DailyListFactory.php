@@ -16,7 +16,7 @@ class DailyListFactory extends Factory
         return [
             'title' => $this->faker->word,
             'description' => $this->faker->text,
-            'date' => $this->faker->dateTime(),
+            'date' => $this->faker->date(),
             'user_id' => rand(1,100),
         ];
     }

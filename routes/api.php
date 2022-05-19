@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DailyListController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Models\DailyList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,13 +21,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+
 });
 
 //Public routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/users', [UserController::class, 'usersFilterLists'])->name('users.usersFilterLists');
+Route::get('/users', [DailyListController::class, 'usersFilterLists'])->name('dailyLists.usersFilterLists');
 Route::post('/listCreate', [DailyListController::class, 'store'])->name('dailyLists.store');
 Route::put('/listUpdate/{id}', [DailyListController::class, 'update'])->name('dailyLists.update');
 Route::delete('/listDelete/{id}', [DailyListController::class, 'destroy'])->name('dailyLists.destroy');
@@ -38,4 +40,5 @@ Route::delete('/taskDelete/{id}', [TaskController::class, 'destroy'])->name('tas
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+//    Route::get('/users', [DailyListController::class, 'usersFilterLists'])->name('dailyLists.usersFilterLists');
 });

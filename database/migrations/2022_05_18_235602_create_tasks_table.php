@@ -14,15 +14,14 @@ class CreateTasksTable extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->timestamps();
-
             $table->string('title');
             $table->text('description');
-            $table->timestamp('deadline');
+            $table->dateTime('deadline');
             $table->boolean('done');
-            $table->unsignedInteger('daily_list_id')->index();
-            $table->foreign('daily_list_id')->references('id')->on('daily_lists');
+            $table->unsignedInteger('daily_list_id');
+            $table->foreign('daily_list_id')->references('id')->on('daily_lists')->onDelete('cascade');
 
         });
     }

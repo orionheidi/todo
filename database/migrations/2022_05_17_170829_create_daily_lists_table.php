@@ -14,14 +14,13 @@ class CreateDailyListsTable extends Migration
     public function up()
     {
         Schema::create('daily_lists', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->timestamps();
-
             $table->string('title');
             $table->text('description');
             $table->date('date');
-            $table->unsignedInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
