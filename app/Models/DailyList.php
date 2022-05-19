@@ -17,4 +17,10 @@ class DailyList extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    //One To many relationship (has many)
+    public function tasks(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
 }

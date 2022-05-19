@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DailyListController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -26,15 +26,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/users', [DailyListController::class, 'usersFilterLists'])->name('dailyLists.usersFilterLists');
+Route::get('/users', [UserController::class, 'usersFilterLists'])->name('users.usersFilterLists');
 Route::post('/listCreate', [DailyListController::class, 'store'])->name('dailyLists.store');
 Route::put('/listUpdate/{id}', [DailyListController::class, 'update'])->name('dailyLists.update');
 Route::delete('/listDelete/{id}', [DailyListController::class, 'destroy'])->name('dailyLists.destroy');
 
+Route::post('/taskCreate', [TaskController::class, 'store'])->name('tasks.store');
+Route::put('/taskUpdate/{id}', [TaskController::class, 'update'])->name('tasks.update');
+Route::delete('/taskDelete/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-//    Route::post('/tasks', [TaskController::class, 'store']);
-//    Route::put('/tasks/{id}', [TaskController::class, 'update']);
-//    Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
 });
