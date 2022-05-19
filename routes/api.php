@@ -29,10 +29,6 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 
-Route::post('/listCreate', [DailyListController::class, 'store'])->name('dailyLists.store');
-Route::put('/listUpdate/{id}', [DailyListController::class, 'update'])->name('dailyLists.update');
-Route::delete('/listDelete/{id}', [DailyListController::class, 'destroy'])->name('dailyLists.destroy');
-
 Route::post('/taskCreate', [TaskController::class, 'store'])->name('tasks.store');
 Route::put('/taskUpdate/{id}', [TaskController::class, 'update'])->name('tasks.update');
 Route::delete('/taskDelete/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
@@ -40,6 +36,8 @@ Route::delete('/taskDelete/{id}', [TaskController::class, 'destroy'])->name('tas
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::put('/listUpdate/{id}', [DailyListController::class, 'update'])->name('dailyLists.update');
+    Route::post('/listCreate', [DailyListController::class, 'store'])->name('dailyLists.store');
+    Route::delete('/listDelete/{id}', [DailyListController::class, 'destroy'])->name('dailyLists.destroy');
     Route::get('/userFilterLists', [DailyListController::class, 'userFilterLists'])->name('dailyLists.userFilterLists');
-//    Route::get('/users', [DailyListController::class, 'usersFilterLists'])->name('dailyLists.usersFilterLists');
 });
