@@ -36,4 +36,26 @@ class DailyListController extends Controller
     {
         return DailyList::destroy($id);
     }
+
+    public function userFilterLists(Request $request)
+    {
+        $user = $request->user();
+
+        $filterUserDailyLists = $user->dailyLists();
+
+        if ($request->query()['title']) {
+            $filterUserDailyLists->where('title', 'LIKE', '%' . $request->query()['title'] . '%');
+        }
+
+        if ($request->query()['date']) {
+            $filterUserDailyLists->where('date', $request->query()['date']);
+        }
+
+        $dailyLists = $filterUserDailyLists->paginate($request->get('per_page', 10));
+
+        return response()->json([
+            'message' => 'Blog successfully fetched',
+            'data' => $dailyLists
+        ]);
+    }
 }
