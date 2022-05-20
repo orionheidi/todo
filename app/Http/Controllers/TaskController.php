@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserCollection;
 use App\Models\DailyList;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -72,6 +76,33 @@ class TaskController extends Controller
         return response()->json([
             'message' => 'Tasks successfully fetched',
             'data' => $tasks
+        ]);
+    }
+
+    public function updateTimeZone(Request $request, $id)
+    {
+
+        $user = User::find($id);
+
+        $user->timezone = $request->get('timezone');
+        $user->save();
+
+        $usersDailyList = $user->dailyLists();
+
+        $tasks = [];
+        foreach ($usersDailyList as $list) {
+            $tasks[] = $list->tasks();
+        }
+
+        $taskUpdateDateTime = [];
+       foreach ($tasks as $task) {
+           //$task->deadline = $date_timezone_set;
+           $taskUpdateDateTime[] = $task->save();
+       }
+
+        return response()->json([
+            'message' => 'User Timezone updated successfully.',
+            'data' => $taskUpdateDateTime
         ]);
     }
 }

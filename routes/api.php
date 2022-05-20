@@ -42,4 +42,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/taskUpdate/{id}', [TaskController::class, 'update'])->name('tasks.update');
     Route::delete('/taskDelete/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
     Route::get('/listFilterTasks', [TaskController::class, 'listFilterTasks'])->name('tasks.listFilterTasks');
+    Route::put('/updateTimeZone/{id}', [TaskController::class, 'updateTimeZone'])->name('tasks.updateTimeZone');
 });
