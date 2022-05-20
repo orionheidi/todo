@@ -42,11 +42,11 @@ class DailyListController extends Controller
 
         $filterUserDailyLists = $user->dailyLists();
 
-        if ($request->query()['title']) {
+        if (isset($request->query()['title']) && $request->query()['title']) {
             $filterUserDailyLists->where('title', 'LIKE', '%' . $request->query()['title'] . '%');
         }
 
-        if ($request->query()['date']) {
+        if (isset($request->query()['date']) && $request->query()['date']) {
             $filterUserDailyLists->where('date', $request->query()['date']);
         }
 

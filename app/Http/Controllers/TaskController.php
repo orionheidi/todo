@@ -59,11 +59,11 @@ class TaskController extends Controller
         $filterListDailyTasks = $list->tasks();
 
 
-        if ($request->query()['done']) {
-            $filterListDailyTasks->where('done', $request->query()['done']);
+        if (isset($request->query()['done'])) {
+            $filterListDailyTasks->where('done', (bool)$request->query()['done']);
         }
 
-        if ($request->query()['deadline']) {
+        if (isset($request->query()['deadline'])) {
             $filterListDailyTasks->where('deadline', $request->query()['deadline']);
         }
 
@@ -71,7 +71,7 @@ class TaskController extends Controller
 
         return response()->json([
             'message' => 'Tasks successfully fetched',
-            'data' =>   $tasks
+            'data' => $tasks
         ]);
     }
 }

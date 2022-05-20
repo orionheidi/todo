@@ -28,7 +28,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/userFilterLists', [DailyListController::class, 'userFilterLists'])->name('dailyLists.userFilterLists');
+//Route::get('/userFilterLists', [DailyListController::class, 'userFilterLists'])->name('dailyLists.userFilterLists');
 
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/listUpdate/{id}', [DailyListController::class, 'update'])->name('dailyLists.update');
     Route::post('/listCreate', [DailyListController::class, 'store'])->name('dailyLists.store');
     Route::delete('/listDelete/{id}', [DailyListController::class, 'destroy'])->name('dailyLists.destroy');
-//    Route::get('/userFilterLists', [DailyListController::class, 'userFilterLists'])->name('dailyLists.userFilterLists');
+    Route::get('/userFilterLists', [DailyListController::class, 'userFilterLists'])->name('dailyLists.userFilterLists');
     Route::post('/taskCreate', [TaskController::class, 'store'])->name('tasks.store');
     Route::put('/taskUpdate/{id}', [TaskController::class, 'update'])->name('tasks.update');
     Route::put('/taskUpdate/{id}', [TaskController::class, 'update'])->name('tasks.update');
