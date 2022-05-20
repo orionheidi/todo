@@ -53,7 +53,7 @@ class DailyListController extends Controller
         $dailyLists = $filterUserDailyLists->paginate($request->get('per_page', 10));
 
         return response()->json([
-            'message' => 'Blog successfully fetched',
+            'message' => 'Lists successfully fetched',
             'data' => $dailyLists
         ]);
     }
