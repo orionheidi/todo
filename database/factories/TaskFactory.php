@@ -18,7 +18,7 @@ class TaskFactory extends Factory
             'description' => $this->faker->text,
             'deadline'  => $this->faker->dateTime(),
             'done' => $this->faker->boolean(),
-            'daily_list_id' => rand(1,1000),
+            'daily_list_id' => rand(1,500),
         ];
     }
 }
