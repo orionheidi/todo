@@ -102,22 +102,15 @@ class TaskController extends Controller
         ]);
     }
 
-    public function updateTaskDone(Request $request, $done)
+    public function updateTaskDone(Request $request, $taskId, $done)
     {
-        $user = $request->user();
-
-        $ListsWithUser = $user->dailyLists()->where('user_id', $user->id)->get();
-
-        $tasks = [];
-
-        foreach ($ListsWithUser as $list) {
-            Task::where('daily_list_id', $list->id)->update(['done' => $done]);
-            $tasks[] = $list->tasks()->where('daily_list_id', $list->id)->get();
-        }
+        Task::where('id', $taskId)->update(['done' => $done]);
+        Task::where('id', $taskId)->update(['updated_at' => now()]);
+        $task = Task::find($taskId);
 
         return response()->json([
-            'message' => 'Task done updated successfully for user.',
-            'filteredTasks' =>   $tasks,
+            'message' => 'Task done updated successfully.',
+            'updateTask' => $task,
         ]);
     }
 }
