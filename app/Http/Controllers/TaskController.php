@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserCollection;
 use App\Models\DailyList;
 use App\Models\Task;
 use App\Models\User;
-use DateTime;
-use DateTimeZone;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -108,6 +103,25 @@ class TaskController extends Controller
         return response()->json([
             'message' => 'Task deadline date and time updated successfully.',
             'filteredTasks' =>   $filteredTasks,
+        ]);
+    }
+
+    public function updateTaskDone(Request $request, $done)
+    {
+        $user = $request->user();
+
+        $ListsWithUser = $user->dailyLists()->where('user_id', $user->id)->get();
+
+        $tasks = [];
+
+        foreach ($ListsWithUser as $list) {
+            Task::where('daily_list_id', $list->id)->update(['done' => $done]);
+            $tasks[] = $list->tasks()->where('daily_list_id', $list->id)->get();
+        }
+
+        return response()->json([
+            'message' => 'Task done updated successfully for user.',
+            'filteredTasks' =>   $tasks,
         ]);
     }
 }
