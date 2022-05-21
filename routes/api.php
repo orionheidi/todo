@@ -3,7 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DailyListController;
 use App\Http\Controllers\TaskController;
-use App\Http\Controllers\UserNotificationTasksDoneController;
+use App\Http\Controllers\UserController;
+use App\Models\DailyList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+//Route::get('/userFilterLists', [DailyListController::class, 'userFilterLists'])->name('dailyLists.userFilterLists');
+
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -41,6 +44,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/listFilterTasks', [TaskController::class, 'listFilterTasks'])->name('tasks.listFilterTasks');
     Route::put('/updateTimeZone/{id}', [TaskController::class, 'updateTimeZone'])->name('tasks.updateTimeZone');
     Route::put('/updateTaskDone/{taskId}/{done}', [TaskController::class, 'updateTaskDone'])->name('tasks.updateTaskDone');
-    Route::get('/taskDoneToday/{list}', [UserNotificationTasksDoneController::class, 'taskDoneToday']);
-    Route::get('/sendUserNotification/{list}' , [UserNotificationTasksDoneController::class, 'sendUserNotification']);
+    Route::get('/sendUserEmailNotification/{list}', [UserController::class, 'sendUserEmailNotification'])->name('users.sendUserEmailNotification');
 });
