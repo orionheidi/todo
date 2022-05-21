@@ -95,19 +95,15 @@ class TaskController extends Controller
         $ListsWithUser = $user->dailyLists()->where('user_id', $user->id)->get();
 
         $tasks = [];
-        foreach ($ListsWithUser as $list) {
-            $tasks[] = $list->tasks()->where('daily_list_id', $list->id)->get();
-            Task::where('daily_list_id', $list->id)->update(['deadline' => $setTimestampOnTimezone]);
-        }
 
-        $filteredTasks = [];
-        foreach ($tasks as $task) {
-            $filteredTasks[] = $task;
+        foreach ($ListsWithUser as $list) {
+            Task::where('daily_list_id', $list->id)->update(['deadline' => $setTimestampOnTimezone]);
+            $tasks[] = $list->tasks()->where('daily_list_id', $list->id)->get();
         }
 
         return response()->json([
             'message' => 'Task deadline date and time updated successfully.',
-            'filteredTasks' =>   $filteredTasks,
+            'filteredTasks' =>   $tasks,
         ]);
     }
 }
