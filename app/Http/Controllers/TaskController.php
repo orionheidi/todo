@@ -6,6 +6,8 @@ use App\Http\Resources\UserCollection;
 use App\Models\DailyList;
 use App\Models\Task;
 use App\Models\User;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -87,22 +89,25 @@ class TaskController extends Controller
         $user->timezone = $request->get('timezone');
         $user->save();
 
-        $usersDailyList = $user->dailyLists();
+        $date = now();
+        $setTimestampOnTimezone = $date->setTimezone($user->timezone)->format('Y-m-d H:i:s');
+
+        $ListsWithUser = $user->dailyLists()->where('user_id', $user->id)->get();
 
         $tasks = [];
-        foreach ($usersDailyList as $list) {
-            $tasks[] = $list->tasks();
+        foreach ($ListsWithUser as $list) {
+            $tasks[] = $list->tasks()->where('daily_list_id', $list->id)->get();
+            Task::where('daily_list_id', $list->id)->update(['deadline' => $setTimestampOnTimezone]);
         }
 
-        $taskUpdateDateTime = [];
-       foreach ($tasks as $task) {
-           //$task->deadline = $date_timezone_set;
-           $taskUpdateDateTime[] = $task->save();
-       }
+        $filteredTasks = [];
+        foreach ($tasks as $task) {
+            $filteredTasks[] = $task;
+        }
 
         return response()->json([
-            'message' => 'User Timezone updated successfully.',
-            'data' => $taskUpdateDateTime
+            'message' => 'Task deadline date and time updated successfully.',
+            'filteredTasks' =>   $filteredTasks,
         ]);
     }
 }
