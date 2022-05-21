@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Console\Commands\userNotify;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Auth;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +15,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        userNotify::class,
     ];
 
     /**
@@ -24,7 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $user = Auth::user();
+        $schedule->command('notify:user')->timezone($user['timezone'])->dailyAt('00:00');
+
+        //testing scheduler
+//        $schedule->command('notify:user')->everyMinute()->appendOutputTo('scheduler.log');
     }
 
     /**
