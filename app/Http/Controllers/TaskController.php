@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    //store
     public function store(Request $request)
     {
         $fields = $request->validate([
