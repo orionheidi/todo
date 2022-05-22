@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\userNotify' => $baseDir . '/app/Console/Commands/userNotify.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
@@ -13,6 +14,7 @@ return array(
     'App\\Http\\Controllers\\DailyListController' => $baseDir . '/app/Http/Controllers/DailyListController.php',
     'App\\Http\\Controllers\\TaskController' => $baseDir . '/app/Http/Controllers/TaskController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
+    'App\\Http\\Controllers\\UserNotificationTasksDoneController' => $baseDir . '/app/Http/Controllers/UserNotificationTasksDoneController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
@@ -27,10 +29,10 @@ return array(
     'App\\Http\\Resources\\TaskCollection' => $baseDir . '/app/Http/Resources/TaskCollection.php',
     'App\\Http\\Resources\\UserCollection' => $baseDir . '/app/Http/Resources/UserCollection.php',
     'App\\Http\\Resources\\UserResource' => $baseDir . '/app/Http/Resources/UserResource.php',
-    'App\\Mail\\SendUserNotifications' => $baseDir . '/app/Mail/SendUserNotifications.php',
     'App\\Models\\DailyList' => $baseDir . '/app/Models/DailyList.php',
     'App\\Models\\Task' => $baseDir . '/app/Models/Task.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Notifications\\UserNotificationTasksDone' => $baseDir . '/app/Notifications/UserNotificationTasksDone.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

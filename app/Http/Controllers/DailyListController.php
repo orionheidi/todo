@@ -16,11 +16,16 @@ class DailyListController extends Controller
             'user_id' => 'required'
         ]);
 
-        return DailyList::create([
+        $dailyLists = DailyList::create([
             'title' => $fields['title'],
             'description' => $fields['description'],
             'date' => $fields['date'],
             'user_id' => $fields['user_id'],
+        ]);
+
+        return response()->json([
+            'message' => 'Lists successfully created',
+            'data' => $dailyLists
         ]);
     }
 
@@ -28,12 +33,21 @@ class DailyListController extends Controller
     {
         $list = DailyList::find($id);
         $list->update($request->all());
-        return $list;
+
+        return response()->json([
+            'message' => 'Lists successfully updated',
+            'data' => $list
+        ]);
     }
 
     public function destroy($id)
     {
-        return DailyList::destroy($id);
+        $deletedList = DailyList::destroy($id);
+
+        return response()->json([
+            'message' => 'Lists successfully deleted',
+            'data' => $deletedList
+        ]);
     }
 
     public function userFilterLists(Request $request)

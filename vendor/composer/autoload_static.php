@@ -546,6 +546,7 @@ class ComposerStaticInit6b0cb8518e488e29646ae59755df289e
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\userNotify' => __DIR__ . '/../..' . '/app/Console/Commands/userNotify.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
@@ -553,6 +554,7 @@ class ComposerStaticInit6b0cb8518e488e29646ae59755df289e
         'App\\Http\\Controllers\\DailyListController' => __DIR__ . '/../..' . '/app/Http/Controllers/DailyListController.php',
         'App\\Http\\Controllers\\TaskController' => __DIR__ . '/../..' . '/app/Http/Controllers/TaskController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
+        'App\\Http\\Controllers\\UserNotificationTasksDoneController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserNotificationTasksDoneController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -567,10 +569,10 @@ class ComposerStaticInit6b0cb8518e488e29646ae59755df289e
         'App\\Http\\Resources\\TaskCollection' => __DIR__ . '/../..' . '/app/Http/Resources/TaskCollection.php',
         'App\\Http\\Resources\\UserCollection' => __DIR__ . '/../..' . '/app/Http/Resources/UserCollection.php',
         'App\\Http\\Resources\\UserResource' => __DIR__ . '/../..' . '/app/Http/Resources/UserResource.php',
-        'App\\Mail\\SendUserNotifications' => __DIR__ . '/../..' . '/app/Mail/SendUserNotifications.php',
         'App\\Models\\DailyList' => __DIR__ . '/../..' . '/app/Models/DailyList.php',
         'App\\Models\\Task' => __DIR__ . '/../..' . '/app/Models/Task.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Notifications\\UserNotificationTasksDone' => __DIR__ . '/../..' . '/app/Notifications/UserNotificationTasksDone.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
